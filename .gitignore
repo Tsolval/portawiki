@@ -4,6 +4,7 @@
 .settings/
 
 # build files
+bin/
 build/
 target/
 *.class
