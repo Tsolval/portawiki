@@ -2,10 +2,8 @@ layout 'layouts/main.tpl',
 wikiTitle: "$wikiTitle",
 pageTitle: 'PortaWiki',
 mainBody: contents {
-   div(class: 'col-sm-9') {
-      h4() { small('RECENT POSTS') }
-      hr()
-      div() {
+   div() {
+      if(page) {
          h2("$page.subject")
          h5() {
             span(class:'glyphicon glyphicon-time', '')
@@ -19,6 +17,8 @@ mainBody: contents {
             }
          }
          hr()
+      } else {
+         h2("Page Not Found")
       }
    }
 }

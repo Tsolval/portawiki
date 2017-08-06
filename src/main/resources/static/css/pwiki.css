@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.toolbar {
+   text-align: center;
+   padding: 5px;
+}
+
+.content {
+   padding: 10px;
+}
+
+.sidenav {
+   margin-top: 10px;
+   height: 100%;
+   background-color: #f1f1f1;
+   border: 1px solid black;
+   border-radius: 25px;
+}
+
+.bootstrap-tagsinput {
+   width: 100%;
+}

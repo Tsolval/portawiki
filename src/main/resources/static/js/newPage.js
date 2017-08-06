@@ -1,0 +1,3 @@
+/**
+ * JavaScript for newPage.tpl.
+ */
