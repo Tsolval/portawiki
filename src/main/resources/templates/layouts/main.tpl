@@ -28,15 +28,17 @@ html {
                   }
                }
                div(class: 'toolbar') {
-                  a(href: '/p', title: 'add a new page') {
+                  a(href: '/+', title: 'add a new page') {
                      span(class: 'glyphicon glyphicon-plus', '')
                   }
                }
-               ul(class: 'nav nav-pills nav-stacked') {
-                  li(class: 'active') { a(href: '#section1', 'Home') }
-                  li() { a(href: '#section2', 'Friends') }
-                  li() { a(href: '#section3', 'Family') }
-                  li() { a(href: '#section4', 'Photos') }
+               if(pages) {
+                  ul(class: 'nav nav-pills nav-stacked') {
+                     pages.each { p ->
+                        def active = p?.equals(page) ? [class:'active'] : [:]
+                        li(active) { a(href: "/${p.title}", "${p.subject}") }
+                     }
+                  }
                }
             }
             div(class: 'col-sm-9') { mainBody() }

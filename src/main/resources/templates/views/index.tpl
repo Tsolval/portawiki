@@ -1,13 +1,17 @@
 layout 'layouts/main.tpl',
 wikiTitle: "$wikiTitle",
 pageTitle: 'PortaWiki',
+pages: pages,
+page: page,
 mainBody: contents {
    div() {
       if(page) {
          h2("$page.subject")
          h5() {
-            span(class:'glyphicon glyphicon-time', '')
-            yield(" Written by $page.author, ${page.date.format('MM-dd-yyyy')} ")
+            span(class: 'leader glyphicon glyphicon-user', '')
+            span("${page.author}")
+            span(class: 'leader glyphicon glyphicon-time', '')
+            span("${page.date?.format('MM-dd-yyyy')}")
          }
          p("$page.body")
          h5() {

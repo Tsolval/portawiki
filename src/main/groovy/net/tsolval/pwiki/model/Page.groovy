@@ -2,8 +2,6 @@ package net.tsolval.pwiki.model
 
 import javax.persistence.ElementCollection
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
@@ -21,13 +19,12 @@ import groovy.transform.ToString
 @ToString
 class Page {
    @Id
-   @GeneratedValue(strategy=GenerationType.AUTO)
-   Long id
+   String title
+   String subject
    String author
    @DateTimeFormat(pattern='MM-dd-YYYY')
    @Temporal(TemporalType.DATE)
    Date date
-   String subject
    String body
    @ElementCollection
    List<String> tags

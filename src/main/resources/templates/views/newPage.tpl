@@ -5,7 +5,13 @@ pageScript: 'js/newPage.js',
 mainBody: contents {
    h3(class: 'text-center', 'New Wiki Page')
    hr()
-   form(class: 'form-horizontal', action: '/p', method: 'post') {
+   form(class: 'form-horizontal', action: "/${page?.title}", method: 'post') {
+      div(class: 'form-group') {
+         label(for: 'title', class: 'col-sm-1 control-label', 'Title:')
+         div(class: 'col-sm-11'){
+            input(name: 'title', type: 'text', class: 'form-control', id: 'title', placeholder: 'Enter Unique Title', value: "${page.title?:''}")
+         }
+      }
       div(class: 'form-group') {
          label(for: 'author', class: 'col-sm-1 control-label', 'Author:')
          div(class: 'col-sm-5') {
