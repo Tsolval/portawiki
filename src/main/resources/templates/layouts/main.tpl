@@ -19,11 +19,13 @@ html {
          div(class: 'row content') {
             div(class: 'col-sm-3 sidenav') {
                a(href: '/') { h4(class: 'text-center', 'Portable Wiki') }
-               div(class: 'input-group') {
-                  input(type: 'text', class: 'form-control', placeholder: 'Search Wiki...')
-                  span(class: 'input-group-btn') {
-                     button(class: 'btn btn-default', type: 'button') {
-                        span(class: 'glyphicon glyphicon-search', '')
+               form(action: '/search', method: 'get') {
+                  div(class: 'input-group') {
+                     input(type: 'text', class: 'form-control', name: 'q', placeholder: 'Search Wiki...')
+                     span(class: 'input-group-btn') {
+                        button(class: 'btn btn-default', type: 'submit') {
+                           span(class: 'glyphicon glyphicon-search', '')
+                        }
                      }
                   }
                }

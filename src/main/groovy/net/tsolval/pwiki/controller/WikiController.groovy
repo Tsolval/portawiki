@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.InitBinder
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 import net.tsolval.pwiki.model.Page
 import net.tsolval.pwiki.repository.jpa.PageRepository
@@ -31,13 +32,26 @@ class WikiController {
       "redirect:/gettingStarted"
    }
 
+   @GetMapping("/search")
+   def searchWiki(@RequestParam('q') String criteria, Model model) {
+      // search first for titles matching the string
+      def titles = pageRepository.findByTitleContainingIgnoreCase(criteria)
+      def subjects = pageRepository.findBySubjectContainingIgnoreCase(criteria)
+      def bodies = pageRepository.findByBodyContainingIgnoreCase(criteria)
+      // then find pages for menu
+      def pages = pageRepository.findAll()
+      // add all variables to model
+      model.addAllAttributes([pages: pages, titles: titles, subjects: subjects, bodies: bodies])
+      // redirect to results page
+      'views/results'
+   }
+
    @GetMapping("/{title}")
    def showPageByName(@PathVariable String title, Model model) {
       def page = pageRepository.findOne(title)
       model.addAttribute('page', page?:new Page(title: title))
       def pages = pageRepository.findAll()
       model.addAttribute('pages', pages)
-      println pages
       page ? 'views/index' : 'views/newpage'
    }
 
