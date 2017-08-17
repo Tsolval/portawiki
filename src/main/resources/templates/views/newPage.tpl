@@ -2,6 +2,7 @@ layout 'layouts/main.tpl',
 wikiTitle: "$wikiTitle",
 pageTitle: 'PortaWiki - New Page',
 pageScript: 'js/newPage.js',
+pages: pages,
 mainBody: contents {
    h3(class: 'text-center', 'New Wiki Page')
    hr()
