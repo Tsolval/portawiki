@@ -34,14 +34,15 @@ class WikiController {
 
    @GetMapping("/search")
    def searchWiki(@RequestParam('q') String criteria, Model model) {
+      Set<Page> found = new HashSet<Page>()
       // search first for titles matching the string
-      def titles = pageRepository.findByTitleContainingIgnoreCase(criteria)
-      def subjects = pageRepository.findBySubjectContainingIgnoreCase(criteria)
-      def bodies = pageRepository.findByBodyContainingIgnoreCase(criteria)
+      found.addAll(pageRepository.findByTitleContainingIgnoreCase(criteria))
+      found.addAll(pageRepository.findBySubjectContainingIgnoreCase(criteria))
+      found.addAll(pageRepository.findByBodyContainingIgnoreCase(criteria))
       // then find pages for menu
       def pages = pageRepository.findAll()
       // add all variables to model
-      model.addAllAttributes([pages: pages, titles: titles, subjects: subjects, bodies: bodies])
+      model.addAllAttributes([pages: pages, found: found])
       // redirect to results page
       'views/results'
    }

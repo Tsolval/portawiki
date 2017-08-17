@@ -3,33 +3,19 @@ wikiTitle: "$wikiTitle",
 pageTitle: 'PortaWiki',
 pages: pages,
 mainBody: contents {
-   div() {
-      if(titles) {
-         h2('Title Matches')
-         hr()
-         titles.each { page ->
-            a(href: "/${page.title}", "${page.title}")
+   h3(class: 'text-center', 'Search Results')
+   div(class: 'panel panel-default') {
+      div(class: 'panel-heading'){ small("Found ${found.size()} matching pages...") }
+      div(class: 'panel-body') {
+         if(found) {
+            found.each { page ->
+               p() {
+                  a(href: "/${page.title}", "${page.subject}")
+               }
+            }
+         } else {
+            yield 'No matches found...'
          }
-      }
-
-      if(subjects) {
-         h2('Subject Matches')
-         hr()
-         subjects.each { page ->
-            a(href: "/${page.title}", "${page.subject}")
-         }
-      }
-
-      if(bodies) {
-         h2('Body Matches')
-         hr()
-         subjects.each { page ->
-            a(href: "/${page.title}", "${page.body}")
-         }
-      }
-
-      if (!titles && !subjects && !bodies) {
-         yield 'No matches found...'
       }
    }
 }
