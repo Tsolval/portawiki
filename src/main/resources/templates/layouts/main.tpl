@@ -31,7 +31,10 @@ html {
                }
                div(class: 'toolbar') {
                   a(href: '/+', title: 'add a new page') {
-                     span(class: 'glyphicon glyphicon-plus', '')
+                     span(class: 'glyphicon glyphicon-plus leader', '')
+                  }
+                  a(href: "/${page.title}/edit", title: 'add a new page') {
+                     span(class: 'glyphicon glyphicon-pencil leader', '')
                   }
                }
                if(pages) {
@@ -40,6 +43,7 @@ html {
                         def active = p?.equals(page) ? [class:'active'] : [:]
                         li(active) { a(href: "/${p.title}", "${p.subject}") }
                      }
+                     p('')
                   }
                }
             }

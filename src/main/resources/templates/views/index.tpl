@@ -6,20 +6,20 @@ page: page,
 mainBody: contents {
    div() {
       if(page) {
-         h2("$page.subject")
+         h1("$page.subject")
          h5() {
             span(class: 'leader glyphicon glyphicon-user', '')
             span("${page.author}")
             span(class: 'leader glyphicon glyphicon-time', '')
             span("${page.date?.format('MM-dd-yyyy')}")
          }
-         p("$page.body")
          h5() {
             page.tags.each { tag ->
-               span(class: 'label label-success', "${tag}")
-               yield ' '
+               span(class: 'leader label label-success', "${tag}")
             }
          }
+         hr()
+         p("$page.body")
          hr()
       } else {
          h2("Page Not Found")

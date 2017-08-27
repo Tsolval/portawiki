@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 import net.tsolval.pwiki.model.Page
 import net.tsolval.pwiki.repository.jpa.PageRepository
+import net.tsolval.pwiki.service.MarkdownService
 
 /**
  * Controls the flow of the application.
@@ -24,14 +25,21 @@ import net.tsolval.pwiki.repository.jpa.PageRepository
  */
 @Controller
 class WikiController {
-   @Autowired
-   PageRepository pageRepository
+   @Autowired PageRepository pageRepository
+   @Autowired MarkdownService mdService
 
    @RequestMapping("/")
    def index() {
       "redirect:/gettingStarted"
    }
 
+   /**
+    * Find pages whose titles, subjects, or bodies matching or containing the given criteria.
+    * 
+    * @param criteria
+    * @param model
+    * @return
+    */
    @GetMapping("/search")
    def searchWiki(@RequestParam('q') String criteria, Model model) {
       Set<Page> found = new HashSet<Page>()
@@ -48,18 +56,28 @@ class WikiController {
    }
 
    @GetMapping("/{title}")
-   def showPageByName(@PathVariable String title, Model model) {
+   def showPage(@PathVariable String title, Model model) {
       def page = pageRepository.findOne(title)
-      model.addAttribute('page', page?:new Page(title: title))
       def pages = pageRepository.findAll()
+      page.body=mdService.toHtml(page.body)
+      model.addAttribute('page', page?:new Page(title: title))
       model.addAttribute('pages', pages)
       page ? 'views/index' : 'views/newpage'
    }
 
    @PostMapping("/{title}")
-   def addPageByTitle(Page page) {
+   def addPage(@PathVariable String title, Page page) {
       page = pageRepository.save(page)
       "redirect:/${page.title}"
+   }
+
+   @GetMapping("/{title}/edit")
+   def editPage(@PathVariable String title, Model model) {
+      def page=pageRepository.findOne(title)
+      def pages = pageRepository.findAll()
+      model.addAttribute('page', page)
+      model.addAttribute('pages', pages)
+      'views/newpage'
    }
 
    @GetMapping("/+")

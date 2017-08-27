@@ -2,6 +2,7 @@ layout 'layouts/main.tpl',
 wikiTitle: "$wikiTitle",
 pageTitle: 'PortaWiki - New Page',
 pageScript: 'js/newPage.js',
+page: page,
 pages: pages,
 mainBody: contents {
    h3(class: 'text-center', 'New Wiki Page')
@@ -32,7 +33,7 @@ mainBody: contents {
       div(class: 'form-group') {
          label(for: 'body', class: 'col-sm-1 control-label', 'Body:')
          div(class: 'col-sm-11') {
-            textarea(name: 'body', class: 'form-control', rows: '3', id: 'body', placeholder: 'Body',  "${page.body?:''}" )
+            textarea(name: 'body', class: 'form-control', rows: '20', id: 'body', placeholder: 'Body',  "${page.body?:''}" )
          }
       }
       div(class: 'form-group') {

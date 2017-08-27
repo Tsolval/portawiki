@@ -3,6 +3,7 @@ package net.tsolval.pwiki.model
 import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Lob
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
 
@@ -25,6 +26,7 @@ class Page {
    @DateTimeFormat(pattern='MM-dd-YYYY')
    @Temporal(TemporalType.DATE)
    Date date
+   @Lob
    String body
    @ElementCollection
    List<String> tags
