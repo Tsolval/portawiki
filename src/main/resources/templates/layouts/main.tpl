@@ -36,6 +36,9 @@ html {
                   a(href: "/${page.title}/edit", title: 'add a new page') {
                      span(class: 'glyphicon glyphicon-pencil leader', '')
                   }
+                  a(href: "/export", title: 'export all pages') {
+                     span(class: 'glyphicon glyphicon-export leader', '')
+                  }
                }
                if(pages) {
                   ul(class: 'nav nav-pills nav-stacked') {
