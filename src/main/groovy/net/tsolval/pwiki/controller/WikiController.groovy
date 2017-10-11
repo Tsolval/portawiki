@@ -93,6 +93,12 @@ class WikiController {
       model.asMap().get('pages')
    }
 
+   @GetMapping("/export/{title}")
+   @ResponseBody
+   def exportPage(@PathVariable String title) {
+      pageRepository.findOne(title)
+   }
+
    @InitBinder
    def dateBinder(WebDataBinder binder) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy")
