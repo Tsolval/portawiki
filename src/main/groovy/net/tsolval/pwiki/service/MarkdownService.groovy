@@ -9,12 +9,15 @@ import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
 
+import net.tsolval.pwiki.logging.Loggable
+
 /**
  * Services for use in parsing the Markdown markup language.
  * @author tsolval
  */
 @Service
 class MarkdownService {
+   @Loggable
    def toHtml(String markdown) {
       MutableDataSet options = new MutableDataSet()
 
