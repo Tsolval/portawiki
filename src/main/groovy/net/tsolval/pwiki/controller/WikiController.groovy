@@ -32,12 +32,16 @@ class WikiController {
 
    @ModelAttribute(name='pages')
    def addPages() {
-      pageRepository.findAll()
+	  pageRepository.findAll()
    }
 
+   /**
+    * Open application to the Home page.
+    * @return
+    */
    @RequestMapping("/")
    def index() {
-      "redirect:/gettingStarted"
+      "redirect:/page/Home"
    }
 
    /**
@@ -52,7 +56,7 @@ class WikiController {
       Set<Page> found = new HashSet<Page>()
       // search first for titles matching the string
       found.addAll(pageRepository.findByTitleContainingIgnoreCase(criteria))
-      found.addAll(pageRepository.findBySubjectContainingIgnoreCase(criteria))
+	  // then search for page bodies matching the string
       found.addAll(pageRepository.findByBodyContainingIgnoreCase(criteria))
       // add all variables to model
       model.addAllAttributes([found: found])
@@ -60,28 +64,7 @@ class WikiController {
       'views/results'
    }
 
-   @GetMapping("/{title}")
-   def showPage(@PathVariable String title, Model model) {
-      def page = pageRepository.findOne(title)
-      page.body=mdService.toHtml(page.body)
-      model.addAttribute('page', page?:new Page(title: title))
-      page ? 'views/index' : 'views/newpage'
-   }
-
-   @PostMapping("/{title}")
-   def addPage(@PathVariable String title, Page page) {
-      page = pageRepository.save(page)
-      "redirect:/${page.title}"
-   }
-
-   @GetMapping("/{title}/edit")
-   def editPage(@PathVariable String title, Model model) {
-      def page=pageRepository.findOne(title)
-      model.addAttribute('page', page)
-      'views/newpage'
-   }
-
-   @GetMapping("/+")
+   @GetMapping("/add")
    def createPage(Model model) {
       model.addAttribute('page', new Page())
       'views/newpage'

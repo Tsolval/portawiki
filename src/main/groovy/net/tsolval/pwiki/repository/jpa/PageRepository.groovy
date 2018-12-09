@@ -9,7 +9,6 @@ import net.tsolval.pwiki.model.Page
  * @author tsolval
  */
 interface PageRepository extends JpaRepository<Page, String> {
-   List<Page> findByTitleContainingIgnoreCase(String title)
-   List<Page> findBySubjectContainingIgnoreCase(String title)
-   List<Page> findByBodyContainingIgnoreCase(String title)
+   List<Page> findByTitleContainingIgnoreCase(String searchString)
+   List<Page> findByBodyContainingIgnoreCase(String searchString)
 }

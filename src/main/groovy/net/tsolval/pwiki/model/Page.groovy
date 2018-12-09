@@ -21,7 +21,6 @@ import groovy.transform.ToString
 class Page {
    @Id
    String title
-   String subject
    String author
    @DateTimeFormat(pattern='MM-dd-YYYY')
    @Temporal(TemporalType.DATE)

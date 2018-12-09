@@ -5,16 +5,16 @@ pages: pages,
 mainBody: contents {
    h3(class: 'text-center', 'Search Results')
    div(class: 'panel panel-default') {
-      div(class: 'panel-heading'){ small("Found ${found.size()} matching pages...") }
+      div(class: 'panel-heading'){ small("found ${found.size()} matching pages...") }
       div(class: 'panel-body') {
          if(found) {
             found.each { page ->
                p() {
-                  a(href: "/${page.title}", "${page.subject}")
+                  a(href: "/page/${page.title}", "${page.title}")
                }
             }
          } else {
-            yield 'No matches found...'
+            yield 'no matches found...'
          }
       }
    }

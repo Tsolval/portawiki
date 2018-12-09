@@ -24,3 +24,27 @@
 .leader {
    margin: 0px 5px;
 }
+
+h1 {
+	margin: 0 0;
+}
+
+nav.navbar.navbar-default {
+	margin-bottom: 0; 
+}
+
+.inline {
+	display: inline-block;
+}
+
+.fl {
+	float: right;
+}
+
+span.glyphicon::before {
+	padding-right: 8px;
+}
+
+.spacer {
+	padding: 5px; 
+}

@@ -15,36 +15,48 @@ html {
       }
    }
    body {
-      div(class: 'container-fluid') {
-         div(class: 'row content') {
-            div(class: 'col-sm-3 sidenav') {
-               a(href: '/') { h4(class: 'text-center', 'Portable Wiki') }
-               form(action: '/search', method: 'get') {
-                  div(class: 'input-group') {
-                     input(type: 'text', class: 'form-control', name: 'q', placeholder: 'Search Wiki...')
-                     span(class: 'input-group-btn') {
-                        button(class: 'btn btn-default', type: 'submit') {
-                           span(class: 'glyphicon glyphicon-search', '')
-                        }
+      nav(class: 'navbar navbar-default') {
+         div(class: 'container-fluid') {
+            div(class: 'navbar-header') {
+               button(type: 'button', class: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#main-navbar-collapse', 'aria-expanded': 'false') {
+                  span(class: 'sr-only', 'Toggle navigation')
+                  span(class: 'icon-bar', '')
+                  span(class: 'icon-bar', '')
+                  span(class: 'icon-bar', '')
+               }
+               a(class: 'navbar-brand', href: '/page/Home', 'Portable Wiki')
+            }
+            div(class: 'collapse navbar-collapse', id: 'main-navbar-collapse') {
+               form(class: 'navbar-form navbar-right', action: '/search') {
+                  div(class: 'form-group') {
+                     input(type: 'text', class: 'form-control', size: '50', placeholder: 'Search Wiki...', name: 'q')
+                     button(type: 'submit', class: 'btn btn-default' ) {
+                        span(class: 'glyphicon glyphicon-search', '')
                      }
                   }
                }
+            } 
+         }
+      }
+      div(class: 'container-fluid') {
+         div(class: 'row content') {
+            div(class: 'col-sm-3 sidenav navbar-right') {
                div(class: 'toolbar') {
-                  a(href: '/+', title: 'add a new page') {
-                     span(class: 'glyphicon glyphicon-plus leader', '')
+                  a(class: 'btn btn-primary btn-xs', href: "/add", title: 'add a new page') {
+                     span(class: 'glyphicon glyphicon-plus', '')
+                     span('Add Page')
                   }
-                  a(href: "/${page.title}/edit", title: 'add a new page') {
-                     span(class: 'glyphicon glyphicon-pencil leader', '')
-                  }
-                  a(href: "/export", title: 'export all pages') {
-                     span(class: 'glyphicon glyphicon-export leader', '')
+                  span(class: 'spacer', '')
+                  a(class: 'btn btn-primary btn-xs', href: "/page/${page?.title}/edit", title: 'edit the current page') {
+                     span(class: 'glyphicon glyphicon-pencil', '')
+                     span('Edit Page')
                   }
                }
                if(pages) {
                   ul(class: 'nav nav-pills nav-stacked') {
                      pages.each { p ->
                         def active = p?.equals(page) ? [class:'active'] : [:]
-                        li(active) { a(href: "/${p.title}", "${p.subject}") }
+                        li(active) { a(href: "/page/${p?.title}", "${p?.title}") }
                      }
                      p('')
                   }

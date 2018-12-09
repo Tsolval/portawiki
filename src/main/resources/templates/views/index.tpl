@@ -6,12 +6,13 @@ page: page,
 mainBody: contents {
    div() {
       if(page) {
-         h1("$page.subject")
+         div {
+            h1("${page.title}")
+         }
          h5() {
-            span(class: 'leader glyphicon glyphicon-user', '')
-            span("${page.author}")
-            span(class: 'leader glyphicon glyphicon-time', '')
-            span("${page.date?.format('MM-dd-yyyy')}")
+            span(class: 'glyphicon glyphicon-user', "${page.author}")
+            span(class: 'spacer', '')
+            span(class: 'glyphicon glyphicon-time', "${page.date?.format('MM-dd-yyyy')}")
          }
          h5() {
             page.tags.each { tag ->
