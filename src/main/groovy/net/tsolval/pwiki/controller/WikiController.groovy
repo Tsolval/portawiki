@@ -58,6 +58,8 @@ class WikiController {
       found.addAll(pageRepository.findByTitleContainingIgnoreCase(criteria))
 	  // then search for page bodies matching the string
       found.addAll(pageRepository.findByBodyContainingIgnoreCase(criteria))
+	  // then search for page bodies matching the string
+	  found.addAll(pageRepository.findByTagContainingIgnoreCase(criteria))
       // add all variables to model
       model.addAllAttributes([found: found])
       // redirect to results page
