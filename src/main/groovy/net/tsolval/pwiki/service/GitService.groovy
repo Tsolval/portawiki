@@ -21,12 +21,12 @@ class GitService {
 	   git = Git.init().setDirectory(new File("${path}")).call()	   
    }
    
-   def addPageBody(String pageBody) {
-	   new File("${path}/${pageBody}").createNewFile()
+   def addPage(String pageTitle, String pageBody) {
+	   def file = new File("${path}/${pageTitle}") //.createNewFile()
+	   file << pageBody
    }
    
    def addToIndex(String pageBody) {
-	   def home=System.getProperty('user.home')
 	   git.add().addFilepattern(pageBody).call()
    }
    
@@ -34,8 +34,8 @@ class GitService {
 	   git.commit().setMessage( message ).call()
    }
    
-   def remove(String pageBody) {
-	  git.rm().addFilepattern(pageBody).call()
+   def remove(String pageTitle) {
+	  git.rm().addFilepattern(pageTitle).call()
    }
    
 }

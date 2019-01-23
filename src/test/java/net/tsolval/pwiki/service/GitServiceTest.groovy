@@ -11,7 +11,8 @@ import static org.junit.Assert.assertEquals
 class GitServiceTest extends Specification {
 
 	@Shared gitService = new GitService()
-	@Shared pageBody = "test9.txt";
+	@Shared pageTitle = "test9.txt";
+	@Shared pageBody = "testing";
 	
 	// update variables to create test repository
 	def setupSpec() {
@@ -30,18 +31,18 @@ class GitServiceTest extends Specification {
 		gitService.initializeWiki()
 
 		when:
-		gitService.addPageBody(pageBody)
+		gitService.addPage(pageTitle, pageBody)
 
 		then:
-		assertTrue( gitService.git.status().call().getUntracked().contains(	pageBody ) );
+		assertTrue( gitService.git.status().call().getUntracked().contains(	pageTitle ) );
 	}
 
 	def "addToIndex should stage a file"(){
 		when:
-		gitService.addToIndex(pageBody)
+		gitService.addToIndex(pageTitle)
 
 		then:
-		assertTrue( gitService.git.status().call().getAdded().contains(pageBody) );
+		assertTrue( gitService.git.status().call().getAdded().contains(pageTitle) );
 	}
 
 	def "def commit(String message)"(){
@@ -57,10 +58,10 @@ class GitServiceTest extends Specification {
 	def "remove should remove file from git"(){
 
 		when:
-		gitService.remove(pageBody)
+		gitService.remove(pageTitle)
 	
 		then:
-		gitService.git.status().call().getRemoved().contains(pageBody)
+		gitService.git.status().call().getRemoved().contains(pageTitle)
 	}
 	
 }
