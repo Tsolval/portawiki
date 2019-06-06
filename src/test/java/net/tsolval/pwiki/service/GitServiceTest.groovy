@@ -16,7 +16,7 @@ class GitServiceTest extends Specification {
 	
 	// update variables to create test repository
 	def setupSpec() {
-		gitService.path = "${gitService.home}/.gwiki/conf/testwiki/"
+		gitService.path = "${gitService.path}"
 	}
 	
 	// destroy test repository when testing is complete

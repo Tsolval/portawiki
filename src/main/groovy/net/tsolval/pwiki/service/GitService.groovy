@@ -1,9 +1,7 @@
 package net.tsolval.pwiki.service
 
 import org.eclipse.jgit.api.Git
-import org.eclipse.jgit.dircache.DirCache
-import org.eclipse.jgit.lib.Repository
-import org.eclipse.jgit.revwalk.RevCommit
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 /**
@@ -13,11 +11,13 @@ import org.springframework.stereotype.Service
 @Service
 class GitService {
 	Git git
-	String home=System.getProperty('user.home')
-	String path = "${home}/.gwiki/conf/wiki/"
+	
+	@Value('${user.home}/.gwiki/conf/wiki/')
+	String path
    
 	/** Create the data directories */ 
    def initializeWiki() {
+	   System.out.println(path)
 	   git = Git.init().setDirectory(new File("${path}")).call()	   
    }
    
