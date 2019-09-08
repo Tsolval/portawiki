@@ -14,6 +14,10 @@ class GitService {
 	
 	@Value('${user.home}/.gwiki/conf/wiki/')
 	String path
+	
+	def listRepos() {
+		[[name: 'Example Wiki', path: 'Path to Wiki']]
+	}
    
 	/** Create the data directories */ 
    def initializeWiki() {
