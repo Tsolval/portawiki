@@ -1,4 +1,4 @@
-insert into page (title, body, author, date ) values ('Home', '## Welcome to Portable Wiki!
+merge into page (title, body, author, date ) values ('Home', '## Welcome to Portable Wiki!
 ### Create Page: 
 To create a new page, click the "Add Page" button in the navigation menu.
 ### Update Page:

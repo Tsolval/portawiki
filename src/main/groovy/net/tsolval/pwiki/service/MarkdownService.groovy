@@ -18,7 +18,8 @@ import net.tsolval.pwiki.logging.Loggable
 @Service
 class MarkdownService {
    @Loggable
-   def toHtml(String markdown) {
+   static def toHtml(String markdown) {
+      if (!markdown) { return null }
       MutableDataSet options = new MutableDataSet()
 
       options.set(Parser.EXTENSIONS, [

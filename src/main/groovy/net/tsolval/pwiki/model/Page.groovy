@@ -1,15 +1,12 @@
 package net.tsolval.pwiki.model
 
-import javax.persistence.ElementCollection
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Lob
-import javax.persistence.Temporal
-import javax.persistence.TemporalType
+import jakarta.persistence.*
 
 import org.springframework.format.annotation.DateTimeFormat
 
 import groovy.transform.ToString
+
+import java.time.LocalDate
 
 /**
  * Represents a page in the Wiki.

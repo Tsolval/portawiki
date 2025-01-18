@@ -11,6 +11,7 @@ import net.tsolval.pwiki.model.Page
  */
 interface PageRepository extends JpaRepository<Page, String> {
    List<Page> findByTitleContainingIgnoreCase(String searchString)
+   @Query("Select page FROM Page page WHERE page.body like :searchString")
    List<Page> findByBodyContainingIgnoreCase(String searchString)
    @Query("SELECT page FROM Page page WHERE :searchString in elements (page.tags)")
    List<Page> findByTagContainingIgnoreCase(@Param("searchString") String searchString)

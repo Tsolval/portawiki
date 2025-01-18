@@ -1,5 +1,8 @@
 package net.tsolval.pwiki.controller
 
+import org.springframework.format.datetime.DateFormatter
+import org.springframework.web.bind.annotation.ResponseBody
+
 import java.text.SimpleDateFormat
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -32,26 +35,30 @@ class PageController {
 	def addPages() {
 	   pageRepository.findAll()
 	}
- 
+
+	@GetMapping('')
+	@ResponseBody
+	def noPageShown() {
+		'No Page'
+	}
+
 	@GetMapping('/')
 	def showHome() {
 		'redirect:/page/Home'
 	}
-	
+
 	/**
 	 * Retrieve a page by its title and display it.
 	 * @param title String representing the id of the page to be displayed.
 	 * @param model Model with data for display.
 	 * @return a Mapping to the page to be displayed
 	 */
-	@GetMapping("/{title}")
-	def showPage(@PathVariable String title, Model model) {
-	   def page = pageRepository.findOne(title)
-	   if (page?.body) {
-		   page.body=mdService.toHtml(page.body)
-	   }
-	   model.addAttribute('page', page?:new Page(title: title))
-	   page ? 'views/index' : 'views/newpage'
+	@GetMapping('/{title}')
+	def showPage(@PathVariable('title') String title, Model model) {
+		def page = pageRepository.findById(title).orElse(new Page(title: title))
+		page.body = mdService.toHtml(page.body);
+		model.addAttribute('page', page)
+		page ? 'views/index' : 'views/newPage'
 	}
  
 	/**
